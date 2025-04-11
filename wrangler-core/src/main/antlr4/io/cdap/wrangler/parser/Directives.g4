@@ -64,6 +64,8 @@ directive
     | stringList
     | numberRanges
     | properties
+    | byteSize
+    | timeDuration
   )*?
   ;
 
@@ -128,7 +130,7 @@ propertyList
  ;
 
 property
- : Identifier '=' ( text | number | bool )
+ : Identifier '=' ( text | number | bool | byteSize | timeDuration )
  ;
 
 numberRanges
@@ -140,7 +142,7 @@ numberRange
  ;
 
 value
- : String | Number | Column | Bool
+ : String | Number | Column | Bool | BYTE_SIZE | TIME_DURATION
  ;
 
 ecommand
@@ -165,6 +167,14 @@ number
 
 bool
  : Bool
+ ;
+
+byteSize
+ : BYTE_SIZE
+ ;
+
+timeDuration
+ : TIME_DURATION
  ;
 
 condition
@@ -255,6 +265,42 @@ Bool
 
 Number
  : Int ('.' Digit*)?
+ ;
+
+BYTE_SIZE
+ : Int ('.' Digit*)? BYTE_UNIT
+ ;
+
+TIME_DURATION
+ : Int ('.' Digit*)? TIME_UNIT
+ ;
+
+fragment BYTE_UNIT
+ : [kKmMgGtTpP][bB]?
+ | 'bytes'
+ | 'byte'
+ | 'b'
+ ;
+
+fragment TIME_UNIT
+ : 'ms'
+ | 's'
+ | 'm'
+ | 'min'
+ | 'h'
+ | 'hour'
+ | 'hours'
+ | 'd'
+ | 'day'
+ | 'days'
+ | 'w'
+ | 'week'
+ | 'weeks'
+ | 'month'
+ | 'months'
+ | 'y'
+ | 'year'
+ | 'years'
  ;
 
 Identifier

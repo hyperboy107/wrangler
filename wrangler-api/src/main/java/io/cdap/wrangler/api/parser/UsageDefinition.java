@@ -17,9 +17,11 @@
 package io.cdap.wrangler.api.parser;
 
 import io.cdap.wrangler.api.Optional;
+import io.cdap.wrangler.api.annotations.Usage;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -241,4 +243,20 @@ public final class UsageDefinition implements Serializable {
       return new UsageDefinition(directive, optionalCnt, tokens);
     }
   }
+
+  private UsageDefinition(List<TokenDefinition> tokens) {
+    this.directive = null;
+    this.tokens = new ArrayList<>(tokens);
+    this.optionalCnt = (int) tokens.stream().filter(TokenDefinition::optional).count();
+  }
+
+  public static UsageDefinition of(String name, TokenType type, String label) {
+    return new UsageDefinition(Collections.singletonList(new TokenDefinition(name, type, label, 0, false)));
+  }
+
+  public UsageDefinition with(String name, TokenType type, String label) {
+    this.tokens.add(new TokenDefinition(name, type, label, tokens.size(), false));
+    return this;
+  }
+
 }

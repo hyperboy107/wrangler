@@ -91,4 +91,13 @@ public final class TokenDefinition implements Serializable {
     return type;
   }
 
+  public ByteSize byteSize(String value) {
+    return new ByteSize(value);
+  }
+  
+  public  TimeDuration timeDuration(String value) {
+    return new TimeDuration(value);
+  }
 }
+
+
