@@ -197,6 +197,45 @@ CDAP IRC Channel: [#cdap on irc.freenode.net](http://webchat.freenode.net?channe
 
 CDAP Users on Slack: [cdap-users team](https://cdap-users.herokuapp.com)
 
+## New Feature: ByteSize & TimeDuration Parsing with Aggregation Directive
+
+This contribution adds enhanced parsing capabilities and a powerful new directive to the Wrangler framework.
+
+---
+
+###  Summary of Enhancements
+
+#### 1. Grammar Extensions
+- Extended the ANTLR grammar (`Directives.g4`) to support:
+  - `BYTE_SIZE` tokens (e.g., `10KB`, `1.5MB`, `2GB`)
+  - `TIME_DURATION` tokens (e.g., `100ms`, `2s`, `1min`)
+- Introduced helper fragments: `BYTE_UNIT`, `TIME_UNIT`
+
+#### 2. API Updates
+- Created two new token classes:
+  - `ByteSize.java`: Parses and converts byte size inputs into canonical byte values.
+  - `TimeDuration.java`: Parses and converts time durations into canonical millisecond values.
+- Integrated these tokens into the existing token handling system.
+
+#### 3. New Directive: `aggregateSizeTime`
+- Aggregates byte size and time across multiple rows.
+- Supports:
+  - Aggregation types: `total`, `avg`
+  - Output in custom units (e.g., `MB`, `seconds`)
+  - Configurable source and target columns via directive arguments
+
+#### 4. Testing Coverage
+- Added unit tests for:
+  - `ByteSize` and `TimeDuration` parsing and unit conversion
+  - `AggregateSizeTime` directive logic and edge cases
+
+---
+
+### 📘 Example Usage
+
+```bash
+aggregateSizeTime inputSize inputTime outputSize outputTime outputSizeUnit=MB outputTimeUnit=seconds aggregationType=avg
+```
 
 ## License and Trademarks
 
