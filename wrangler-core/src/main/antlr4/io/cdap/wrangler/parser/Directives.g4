@@ -128,7 +128,7 @@ propertyList
  ;
 
 property
- : Identifier '=' ( text | number | bool )
+ : Identifier '=' ( text | number | bool | byteSize | timeDuration )
  ;
 
 numberRanges
