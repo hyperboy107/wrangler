@@ -257,6 +257,42 @@ Number
  : Int ('.' Digit*)?
  ;
 
+ BYTE_SIZE
+ : Int ('.' Digit*)? BYTE_UNIT
+ ;
+
+TIME_DURATION
+ : Int ('.' Digit*)? TIME_UNIT
+ ;
+
+fragment BYTE_UNIT
+ : [kKmMgGtTpP][bB]?
+ | 'bytes'
+ | 'byte'
+ | 'b'
+ ;
+
+fragment TIME_UNIT
+ : 'ms'
+ | 's'
+ | 'm'
+ | 'min'
+ | 'h'
+ | 'hour'
+ | 'hours'
+ | 'd'
+ | 'day'
+ | 'days'
+ | 'w'
+ | 'week'
+ | 'weeks'
+ | 'month'
+ | 'months'
+ | 'y'
+ | 'year'
+ | 'years'
+ ;
+
 Identifier
  : [a-zA-Z_\-] [a-zA-Z_0-9\-]*
  ;
