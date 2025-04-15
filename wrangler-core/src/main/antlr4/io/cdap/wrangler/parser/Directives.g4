@@ -140,7 +140,7 @@ numberRange
  ;
 
 value
- : String | Number | Column | Bool
+ : String | Number | Column | Bool | ByteSize | TimeDuration
  ;
 
 ecommand
@@ -255,6 +255,14 @@ Bool
 
 Number
  : Int ('.' Digit*)?
+ ;
+
+ByteSize
+ : Number (('K' | 'M' | 'G' | 'T')? 'B')
+ ;
+
+TimeDuration
+ : Number (('ms' | 's' | 'm' | 'h' | 'd'))
  ;
 
 Identifier
