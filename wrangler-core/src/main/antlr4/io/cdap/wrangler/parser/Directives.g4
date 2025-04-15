@@ -128,7 +128,7 @@ propertyList
  ;
 
 property
- : Identifier '=' ( text | number | bool )
+ : Identifier '=' ( text | number | bool | ByteSize | TimeDuration )
  ;
 
 numberRanges
@@ -255,6 +255,14 @@ Bool
 
 Number
  : Int ('.' Digit*)?
+ ;
+
+ByteSize
+ : Number (('K' | 'M' | 'G' | 'T')? 'B')
+ ;
+
+TimeDuration
+ : Number (('ms' | 's' | 'm' | 'h' | 'd'))
  ;
 
 Identifier
